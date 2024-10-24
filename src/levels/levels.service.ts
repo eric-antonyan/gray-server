@@ -55,4 +55,25 @@ export class LevelsService {
       level
     }
   }
+
+  async getLevel(id: string, quizId: string) {
+    if (isNaN(Number(id))) {
+      throw new BadRequestException({
+        message: `ID must be integer, try again`,
+      });
+      return;
+    }
+
+    const exist = await this.levelModel.findOne({ id, quizId });
+
+    if (!exist) {
+      const quiz = await this.levelModel.findOne({
+        id, quizId,
+      });
+
+      return {
+        level: quiz.level
+      }
+    }
+  }
 }

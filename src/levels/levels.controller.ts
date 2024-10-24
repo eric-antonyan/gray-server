@@ -25,4 +25,9 @@ export class LevelsController {
 
     return this.levelService.setLevel(id, quizId, level)
   }
+
+  @Get(":id/:quizzId/:level")
+  async getLevel(@Param("id") id: string, @Param("quizId") quizId: string) {
+
+  }
 }
