@@ -7,11 +7,6 @@ import { UpdateQuestionDto } from './dto/update-question.dto';
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
-  @Post()
-  async create(@Body() createQuestionDto: CreateQuestionDto) {
-    await this.questionService.create(createQuestionDto);
-  }
-
   @Get()
   findAll() {
     return this.questionService.findAll();
