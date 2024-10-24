@@ -15,4 +15,9 @@ export class UsersController {
         const user = await this.userService.findUser(id);
         return user;
     }
+
+    @Get(":id/plus")
+    async plus(@Param("id") id: string) {
+        return this.userService.plus(id)
+    }
 }
