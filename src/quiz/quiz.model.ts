@@ -10,6 +10,9 @@ export class Quiz {
 
     @Prop()
     background: string;
+
+    @Prop()
+    inDevelopment: boolean;
 }
 
 export const QuizSchema = SchemaFactory.createForClass(Quiz);
