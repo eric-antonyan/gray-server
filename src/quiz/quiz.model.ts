@@ -7,6 +7,9 @@ export class Quiz {
 
     @Prop()
     title: string;
+
+    @Prop()
+    background: string;
 }
 
 export const QuizSchema = SchemaFactory.createForClass(Quiz);

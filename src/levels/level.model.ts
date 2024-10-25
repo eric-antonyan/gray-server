@@ -2,13 +2,13 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Level {
-  @Prop()
+  @Prop({required: true})
   id: string;
 
-  @Prop()
+  @Prop({required: true})
   quizId: string;
 
-  @Prop()
+  @Prop({required: true})
   level: number;
 }
 

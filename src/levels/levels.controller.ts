@@ -7,7 +7,7 @@ export class LevelsController {
     private levelService: LevelsService
   ) {
   }
-  @Get(":id/:quizzId/:level")
+  @Get(":id/:quizId/:level")
   async setLevel(@Param("id") id: string, @Param("quizId") quizId: string, @Param("level") level: string) {
     if (isNaN(Number(id))) {
       throw new BadRequestException({
@@ -26,8 +26,14 @@ export class LevelsController {
     return this.levelService.setLevel(id, quizId, level)
   }
 
-  @Get(":id/:quizzId/")
-  async getLevel(@Param("id") id: string, @Param("quizId") quizId: string) {
-    return this.levelService.getLevel(id, quizId)
+  @Get(':id/:quizId')
+  async getLevel(@Param('id') id: string, @Param('quizId') quizId: string) {
+    if (isNaN(Number(id))) {
+      throw new BadRequestException({
+        message: 'ID must be an integer, try again',
+      });
+    }
+
+    return this.levelService.getLevel(id, quizId);
   }
 }
