@@ -11,4 +11,11 @@ export class QuestionController {
   findAll() {
     return this.questionService.findAll();
   }
+
+  @Post()
+  async create(@Body() createQuestionDto: CreateQuestionDto) {
+    await this.questionService.create(createQuestionDto);
+  }
+
+
 }

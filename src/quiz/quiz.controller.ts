@@ -16,4 +16,17 @@ export class QuizController {
     const quizzes = await this.quizService.findAll(id);
     return quizzes;
   }
+
+  @Get(":id/clear")
+  async clear(@Param("id") id: string) {
+    console.log(id);
+    const quizzes = await this.quizService.clear(id);
+    return quizzes;
+  }
+
+  @Get()
+  async getAll() {
+    const quizzes = await this.quizService.getAll()
+    return quizzes;
+  }
 }

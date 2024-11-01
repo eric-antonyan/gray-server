@@ -18,4 +18,20 @@ export class QuestionService {
 
     return questions; // Return the list of questions
   }
+
+  async create(createQuestionDto: CreateQuestionDto) {
+    const customAnswers = [
+      createQuestionDto.answer_1,
+      createQuestionDto.answer_2,
+      createQuestionDto.answer_3
+    ];
+    const newQuestion = await this.questionModel.create({
+      task: createQuestionDto.task,
+      correct: parseInt(createQuestionDto.correct) - 1, // Assuming index based
+      answers: customAnswers,
+      group: createQuestionDto.group,
+      image: createQuestionDto.image
+    });
+    return newQuestion; // Return the created question
+  }
 }

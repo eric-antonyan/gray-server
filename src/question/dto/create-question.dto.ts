@@ -5,4 +5,5 @@ export class CreateQuestionDto {
     task: string;
     correct: string;
     group: string;
+    image: string;
 }

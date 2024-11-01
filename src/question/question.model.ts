@@ -13,6 +13,9 @@ export class Question {
 
     @Prop()
     group: string;
+
+    @Prop()
+    image: string;
 }
 
 export const QuestionSchema = SchemaFactory.createForClass(Question);

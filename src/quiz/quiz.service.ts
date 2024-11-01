@@ -16,6 +16,31 @@ export class QuizService {
   ) {
   }
 
+  async clear(id: string) {
+    if (isNaN(Number(id))) {
+      throw new BadRequestException({
+        message: `ID must be integer, try again`,
+      });
+      return;
+    }
+
+    const user = await this.userModel.findOne({ id });
+
+    if (!user) {
+      throw new NotFoundException({
+        message: `User with id ${id} not found in database`,
+      });
+    }
+
+    const updated = await this.levelModel.deleteMany({ id });
+    const balanceUpdated = await this.userModel.updateOne({ id }, { balance: 0 });
+
+    if (updated && balanceUpdated) {
+      const questions = await this.findAll(id);
+      return questions;
+    }
+  }
+
   async findAll(id: string): Promise<{ quiz: Quiz; size: number }[]> {
     if (isNaN(Number(id))) {
       throw new BadRequestException({
@@ -53,7 +78,12 @@ export class QuizService {
   }
 
   async findOne(uuid: string) {
-    const document = await this.questionModel.find({group: uuid})
+    const document = await this.questionModel.find({ group: uuid });
     return document;
+  }
+
+  async getAll(): Promise<Quiz[]> {
+    const documents = await this.quizModel.find().exec();
+    return documents;
   }
 }
